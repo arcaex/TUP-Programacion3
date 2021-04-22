@@ -10,14 +10,18 @@
 </head>
 <script>
 
+    var divCount = 0;
+
     function onTecla(texto) {
         addElement(texto);
     }
 
     function addElement(texto) {
         // CREAMOS EL NUEVO ELEMENTO
-        var newDiv = document.createElement("div");
+        var newDiv = document.createElement("input");
         // AGREGAMOS LA CLASE AL ELEMENTO
+        newDiv.type = "date";
+        newDiv.id = self.divCount.toString();
         newDiv.classList.add("Salida");
         // SETEAMOS EL TEXTO DEL DIV
         newDiv.innerHTML=texto.value;
@@ -25,6 +29,7 @@
         var currentDiv = document.getElementById("SalidaBox");
         // INSERTAMOS EL NUEVO ELEMENTO
         document.body.insertBefore(newDiv, currentDiv);
+        self.divCount++;
     }
 
 </script>
