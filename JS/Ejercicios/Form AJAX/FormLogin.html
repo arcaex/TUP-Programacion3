@@ -11,6 +11,9 @@
 </head>
 <script>
     $(document).ready(function () {
+        // Ocultar el Login si existe el token en el LocalStorage 
+        
+        // curl --location --request POST 'http://kiwicode.tech:3000/auth' \ --header 'Content-Type: application/json' \ --data-raw '{ "mail":"graciajorge.sist@gmail.com", "password": "123123" }' 
         $("#Login").click(
         function(){
             var usuario = $("#user").val();
@@ -33,6 +36,7 @@
                 }
             });
         });
+
         $("#getDatos").click(
         function(){
             $.ajax({
@@ -50,6 +54,8 @@
                 }
             });
         });
+
+        // curl --location --request POST 'http://kiwicode.tech:3000/roles' \ --header 'Content-Type: application/json' \ --data-raw '{ "descripcion": "Rolprueba" }' 
         $("#postDescripcion").click(
         function(){
             var descripcion = $("#descripcion").val();
@@ -68,13 +74,31 @@
                 }
             });
         });
+
+        // curl --location --request DELETE 'http://kiwicode.tech:3000/roles/4' \ --header 'Content-Type: application/json'
+        $("#deleteRol").click(
+        function(){
+            var idRol = $("#idRol").val();
+            $.ajax({
+                url: "http://kiwicode.tech:3000/roles/" + idRol,
+                type: "DELETE",
+                headers: {
+                    Authorization : localStorage.getItem("token")
+                },
+                data: { },
+                success: function (result) {
+                    alert("Se ha eliminado el Rol ID: "+ idRol);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseJSON.data.errMessage);
+                }
+            });
+        });
+
+        // curl --location --request PUT 'http://kiwicode.tech:3000/roles/3' \ --header 'Content-Type: application/json' \ --data-raw '{ "descripcion": "Clientes" }'
+
     });
 </script>
-
-<!--
-curl --location --request POST 'http://kiwicode.tech:3000/auth' \ --header 'Content-Type: application/json' \ --data-raw '{ "mail":"graciajorge.sist@gmail.com", "password": "123123" }' 
-curl --location --request POST 'http://kiwicode.tech:3000/roles' \ --header 'Content-Type: application/json' \ --data-raw '{ "descripcion": "Rolprueba" }' 
--->
 
 <body id="body">
     <div class="box">
@@ -103,7 +127,13 @@ curl --location --request POST 'http://kiwicode.tech:3000/roles' \ --header 'Con
             <div class="container">
                 Id Rol
                 <input class="inputClass" type="text" id="idRol" name="idRol" placeholder="Ingrese Id Rol"/>
-                <button class="inputClassButton" name="boton" id="postDescripcion">Borrar Rol</button> <br>
+                <button class="inputClassButton" name="boton" id="deleteRol">Borrar Rol</button> <br>
+            </div>
+            <div class="container">
+                Modificar Rol
+                <input class="inputClass" type="text" id="idRol" name="idRol" placeholder="Ingrese Id Rol"/>
+                <input class="inputClass" type="text" id="descripcion" name="descripcion" placeholder="Ingrese Descripción"/>
+                <button class="inputClassButton" name="boton" id="updateRol">Modificar Rol</button> <br>
             </div>
         </div>
 
