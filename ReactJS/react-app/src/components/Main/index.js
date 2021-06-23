@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import Menu  from '../Menu/'
 
-//Importar los componentes con estilo
-import { TopTitle } from './styled';
+import Navbar     from './navbar/';
+import Menu       from './menu/';
+import Dashboard  from './dashboard/';
 
-//Declaramos el nombre de la clase que generamos y la extendemos de Component
-//Que es la clase principal de Componentes de REACT, para crear nuestros Componentes
+import { MainLayout,MainBody } from './styled';
 
 class Main extends Component {
   render() {
     return (
-      <div>
-        <TopTitle>Hola mundo</TopTitle>
-        <Menu itemsMenu={["menu1","menu2","menu3"]} titulo="Menu" prueba="Hola Mundo"></Menu>
-      </div>
+      <MainLayout>
+        <Navbar></Navbar>
+        <MainBody>
+          <Menu itemsMenu={["menu1","menu2","menu3"]} titulo="Menu" prueba="Hola Mundo"></Menu>
+          <Dashboard></Dashboard>
+        </MainBody>
+      </MainLayout>
     );
   }
 }
 
-//Exportamos nuestro componente para que esté disponible a otros componentes.
 export default Main;
