@@ -1,41 +1,40 @@
-import React, { Component } from 'react';
-import { DashboardBox, ButtonDashboard } from './styled';
-import ClipLoader from "react-spinners/ClipLoader";
+import React, { useEffect, useState } from 'react';
+import { DashboardBox } from './styled';
 
-class Dashboard extends Component {
+function Dashboard({countState}){
 
-  constructor(props){
-    super(props);
-    this.activo = false;
-    this.texto = "";
+  const [count, setCount] = useState(0);
+
+  const [dashboardState, setDashboardState] = useState({
+    isVisible: false,
+    lista: ["uno","dos","tres"]
+  });
+
+  useEffect(() => {
+    document.title = `Clicks ${count}`;
+    console.log(dashboardState);
+  });
+
+  useEffect(() => {
+    if(count===10){
+      alert("Llego a 10!");
+    }
+  }, [count]);
+
+  const handleclick = () => {
+    countState.setState(countState.state+1);
+    setDashboardState({
+      ...dashboardState,
+      isVisible: true
+    });
   }
-  
-  handleClickButton = (variable) => {
-    alert("Hola Mundo");
-  }
-
-  handleKeyPress = (e) => {
-    console.log(e.target.value);
-  }
-
-  handleKeyPressBind = (e) => {
-    this.texto = e.target.value;
-    console.log(this.texto);
-  }
-
-  render() { 
-    return (
+  return (
       <DashboardBox>
-        { this.activo ? 
-          <ButtonDashboard onClick={() => this.handleClickButton(this)}>Presioname</ButtonDashboard>
-        :
-          <input onKeyPress={(e) => this.handleKeyPress(e)} type="text"></input>
-         }
-         <input value={this.texto} type="text" onKeyPress={(e)=> this.handleKeyPressBind(e)} ></input>
-        <ClipLoader color={"red"} loading={true} size={150} />
+        <p>Clicks{count} times</p>
+        <button onClick={() => setCount(count + 1)}> ClickMe! </button>
+        <button onClick={handleclick}>Click Handle</button>
       </DashboardBox>
     );
-  }
 }
 
 export default Dashboard;

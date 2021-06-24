@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import { IconBarList, ItemList } from './styled';
 
-class Iconbar extends Component {
-  render() {
+function Iconbar(){
     return (
       <IconBarList>
         <ItemList>A</ItemList>
@@ -10,7 +9,6 @@ class Iconbar extends Component {
         <ItemList>C</ItemList>
       </IconBarList>
     );
-  }
 }
 
 export default Iconbar;

@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Iconbar  from './iconbar';
 import User from './user';
 
 import { NavigationBar, NavigationItems } from './styled';
 
-class Navbar extends Component {
-  render() {
+function Navbar() {
     return (
       <NavigationBar>
         <NavigationItems>
@@ -14,7 +13,6 @@ class Navbar extends Component {
         </NavigationItems>
       </NavigationBar>
     );
-  }
 }
 
 export default Navbar;
